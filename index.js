@@ -194,6 +194,7 @@ function getProjectData() {
             message: "For questions:",
             name: "projectQs"
         }])
+        
         .then(response => {
             let projectContribList = [];
             let projectContributors = "";
