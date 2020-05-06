@@ -3,8 +3,8 @@ const axios = require("axios");
 const inquirer = require("inquirer");
 const util = require("util");
 const api = require("./api.js")
-
-// Promisify fs.writeFile
+    // \`\`\`npm run test\`\`\`
+    // Promisify fs.writeFile
 const writeFileAsync = util.promisify(fs.writeFile);
 
 // Prompt user
@@ -18,10 +18,10 @@ promptUser()
                 // Call the getGitHubData function to get the avatar url
                 const avatar = await getGitHubData(username);
                 // Generate the readme using all the response data
-                let data = {
+                // let data = {
 
-                }
-                return generateMarkdown(username, title, description, installation, usage, license, contributing, tests, questions); //when you call, turn all that 
+                // }
+                return generateMarkdown(username, title, description, installation, usage, license, contributing, tests, questions, avatar); //when you call, turn all that 
                 // If there's an error, log error
             } catch (err) {
                 console.log(err);
@@ -88,12 +88,9 @@ function promptUser() {
     ])
 }
 
-// Create function to call axios to get user's avatar url
-function getGitHubData(username) {
-    // const queryUrl = `https://api.github.com/search/users?q=${username}`;
 
-    // return axios
-    //     .get(queryUrl)
+function getGitHubData(username) {
+    const queryUrl = `https://api.github.com/search/users?q=${username}`;
     api.getUser(username)
         .then(function(response) {
             const { avatar_url } = response.data.items[0];
@@ -102,7 +99,8 @@ function getGitHubData(username) {
 }
 
 // Create function to generate the template literate using data from the prompt and GitHub call
-function generateMarkdown(username, title, description, installation, usage, license, contributing, tests, questions) {
+function generateMarkdown(username, title, description, installation, usage, license, contributing, tests, questions, avatar) {
+    `\`\`\`npm run test\`\`\``
     return `
 # ${title}  
   
@@ -137,17 +135,15 @@ ${description}
     ${questions}
 
 ## Author
-Name: __${fullName}__  
+Name: Jon Christie 
 GitHub: github.com/${username}  
 ![Image of Me](${avatar})
 
 
 ![badge](https://img.shields.io/badge/License-MIT-orange/)
-//
-//what dependencies are requiered 
-//1 desc
-//three backticks to show code in markdwon, but bac its inside of node and have a function, so \`\`\`npm run test\`\`\`
+
+//three backticks to show code in markdwon, but bac its inside of node and have a function, so
 ---
-© 2020 ${fullName}. All Rights Reserved.
+© 2020 Jon Christie. All Rights Reserved.
 `
 }
