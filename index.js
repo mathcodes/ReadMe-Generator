@@ -1,550 +1,192 @@
-//  **  Dependencies
-
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
+const util = require("util");
 
-//  **  Declarations
+// Promisify fs.writeFile
+const writeFileAsync = util.promisify(fs.writeFile);
 
-const _myGitHubAccessToken = "073dd25e5f7c804e36d53095f24da95fc036db71";
-const _GITHUBAPI_USER_ENDPOINT = `https://api.github.com/users/%NAME%`;
-const _GITHUBAPI_USERSEARCH_ENDPOINT = `https://api.github.com/users/search?q=%NAME%`
-const _DEFAULT_OUTPUT_FILENAME = "README.out.md";
-
-const _LICENSE_NONE = 0;
-const _LICENSE_INQUIRER = 1;
-const _LICENSE_BSD_3CLAUSE = 2;
-const _LICENSE_CREATIVE_COMMONS_1 = 3;
-const _LICENSE_GNU_GPL3 = 4;
-const _LICENSE_MIT = 5;
-const _LICENSE_MOZILLA = 6;
-const _LICENSE_UNLICENSE = 7;
-
-const _LICENSE_TYPES = [
-    "No license",
-    "Inquirer",
-    "BSD 3-Clause License",
-    "Creative Commons Zero 1.0",
-    "GNU GPL v3",
-    "The MIT License",
-    "Mozilla Public License 2.0",
-    "The Unlicense"
-];
-
-let _user, _project;
-let _team = [];
-let _filename = "";
-
-//  **  Constructors
-
-/**
- * Constructor function for UserInfo objects
- * @param {Text} login GitHub username
- * @param {Text} avatarUrl URL for avatar image
- * @param {Text} email GitHub public email address
- * @param {Text} htmlUrl URL for GitHub profile page
- * @param {Text} type User type
- * @param {Boolean} siteAdmin TRUE if the user is an admin
- */
-const UserInfo = function(login, avatarUrl, email, htmlUrl, type, siteAdmin) {
-    return {
-        name: login,
-        avatar: avatarUrl,
-        email: email,
-        url: htmlUrl,
-        type: type,
-        isSiteAdmin: siteAdmin
-    };
-};
-
-/**
- * Constructor function for Project data structures
- * @param {Text} name function name (with alt-name included)
- * @param {Text} logoUrl URL for project logo image
- * @param {Text} badges space-delimited list of MD image links for shield/badges
- * @param {Text} tag Project tagline
- * @param {Text} desc Project Introduction
- * @param {Text} imageUrl URL(s) for main project screenshots
- * @param {Text} install Installation instructions with MD screenshot links
- * @param {Text} usage Usage instructions with MS screenshot links
- * @param {Text} license License type
- * @param {Text} contrib List of contributors
- * @param {Text} tests Test instructions with MS screenshot links
- * @param {Text} questions Contact details for asking questions
- */
-const ProjectInfo = function (name, logoUrl, badges, tag, desc, imageUrl, install, usage, license, contrib, tests, questions) {
-    return {
-        title: name,
-        logo: logoUrl,
-        badges: badges,
-        tagline: tag,
-        introduction: desc,
-        image: imageUrl,
-        installation: install,
-        usage: usage,
-        license: license,
-        contributing: contrib,
-        tests: tests,
-        questions: questions
-    }
-};
-
-//  **  Functions
-
-/**
- * Prompt the user for user and project details
- */
-function getProjectData() {
-    _filename = _DEFAULT_OUTPUT_FILENAME;
-    if (process.argv[2] && process.argv[2] != "") {
-        _filename = process.argv[2];
-    };
-
-    inquirer
-    .prompt({
-        message: "Please enter your GitHub username",
-        name: "userName"
+// Prompt user
+promptUser()
+    .then(
+        // Use response
+        async function (response) {
+            try {
+                // and get each separate response
+                const { fullName, username, title, shortDescription, longDescription, screenshotUrl, installation, usage, credits, license, tests, badge } = response;
+                // Call the getGitHubData function to get the avatar url
+                const avatar = await getGitHubData(username);
+                // Generate the readme using all the response data
+                return generateREADME(fullName, username, title, shortDescription, longDescription, screenshotUrl, installation, usage, credits, license, tests, avatar, badge);
+            // If there's an error, log error
+            } catch (err) {
+                console.log(err);
+            }
     })
-    .then(response => {
-        getGitUser(response.userName);
-        return true;
+    .then(function (text) {
+        // Then use the result from the generateREADME function to write the README file
+        writeFileAsync("README_GENERATED.md", text, "utf8");
+        // Log to the console a success message
+        console.log("Success!!! README_GENERATED.md has been generated.");
     })
-    .then(response => {
-        inquirer
-        .prompt([
+    .catch(function (err) {
+        console.log(err);
+    });
+
+// Create a function to prompt users for data
+function promptUser() {
+    return inquirer.prompt([
         {
             type: "input",
-            message: "Project Name?",
-            default: "myProject",
-            name: "projectName"
+            message: "Enter your full name:",
+            name: "fullName"
         },
         {
             type: "input",
-            message: "Alternate Name?",
-            name: "projectName2"            
+            message: "Enter your GitHub username:",
+            name: "username"
         },
         {
             type: "input",
-            message: "URL to project logo (blank if N/A):",
-            name: "projectLogo"            
+            message: "Give your project a title:",
+            name: "title"
         },
         {
             type: "input",
-            message: "Project Badges (separate with commas, blank for none):",
-            name: "projectBadges"            
+            message: "Give your project a short description:",
+            name: "shortDescription"
         },
         {
             type: "input",
-            message: "Project tagline -",
-            name: "projectTag"            
+            message: "Give your project a long description:",
+            name: "longDescription"
         },
         {
             type: "input",
-            message: "Project Introduction:",
-            name: "projectIntro"
+            message: "Include a url of a screenshot:",
+            name: "screenshotUrl"
         },
         {
             type: "input",
-            message: "Project Image URL (blank for none):",
-            name: "projectImage"            
+            message: "Provide a step-by-step description of how to install your project (separate using a comma):",
+            name: "installation"
         },
-        // {
-        //     type: "editor",
-        //     message: "Installation Instructions:",
-        //     name: "projectInstall"
-        // },
         {
             type: "input",
-            message: "Installation Screenshot URLs (separate with commas; blank for none):",
-            name: "projectInstallScreenshots"            
+            message: "Provide instructions and examples for use (separate using a comma):",
+            name: "usage"
         },
-        // {
-        //     type: "editor",
-        //     message: "Project Usage:",
-        //     name: "projectUsage"
-        // },
         {
             type: "input",
-            message: "Usage Screenshots (separate with commas; blank for none) -",
-            name: "projectUsageScreenshots"            
+            message: "List your collaborators, third-party assets, etc. if any (separate using a comma):",
+            name: "credits"
         },
         {
             type: "list",
-            message: "Project License",
-            choices: _LICENSE_TYPES,
-            name: "projectLicense"
-        },
-        // {
-        //     type: "input",
-        //     message: "Contributing Git Usernames (separate entries by commas; blank if none):",
-        //     name: "projectCollab"
-        // },
-        // {
-        //     type: "editor",
-        //     message: "Tests:",
-        //     name: "projectTests"
-        // },
-        {
-            type: "input",
-            message: "Test Screenshots (separate with commas; blank for none) -",
-            name: "projectTestScreenshots"            
+            message: "Choose a license for your project:",
+            name: "license",
+            choices: [
+                "MIT License",
+                "GNU AGPLv3",
+                "GNU GPLv3",
+                "GNU LGPLv3",
+                "GNU GPLv2",
+                "Mozilla Public License 2.0",
+                "Apache License 2.0",
+                "ISC License",
+                "Boost Software License 1.0",
+                "The Unlicense"
+            ]
         },
         {
             type: "input",
-            message: "For questions:",
-            name: "projectQs"
-        }])
-        
-        .then(response => {
-            let projectContribList = [];
-            let projectContributors = "";
-            if (response.projectCollab != "") {
-                // projectContribList = splitAndTrim(response.projectCollab);
-                //      Wanted to get user details on GitHub, but didn't have time to get the code working.
-                // getTeam(projectContribList);
-                projectContributors = projectContribList.join(", ");
-            };
+            message: "Write tests for your application (separate using a comma):",
+            name: "tests"
+        },
+        {
+            type: "input",
+            message: "Add a url for a badge for this application:",
+            name: "badge"
+        }
+    ])
+}
 
-            let licenseIndex = _LICENSE_TYPES.indexOf(response.projectLicense);
-            let licenseUrl = licenseURL(licenseIndex);
-            let projectTitle = response.projectName
-            
-            if ((response.projectName2 != projectTitle) || (response.projectName2 == "")) {
-                projectTitle += " - " + response.projectName2;
-            };
+// Create function to call axios to get user's avatar url
+function getGitHubData(username) {
+    const queryUrl = `https://api.github.com/search/users?q=${username}`;
 
-            let projectLogo = "";
-            if (response.projectLogo != "") {
-                projectLogo = "![Project Logo](" + response.projectLogo + ")";
-            };
-
-            let projectBadgeList = [];
-            if (response.projectBadges != "") {
-                projectBadgeList = splitAndTrim(response.projectBadges);
-            };
-            projectBadgeList.push(licenseUrl);
-            let projectBadges = projectBadgeList.join("   ");
-
-            let projectTagline = response.projectTag;
-            let projectIntro = response.projectIntro;
-
-            let projectImageArray = [];
-            let projectImages = "";
-            if (response.projectImage != "") {
-                projectImageArray = splitAndTrim(response.projectImage);
-                projectImageArray = projectImageArray.map((element, index) => `![Project Image ${index}](${element})`);
-                projectImages = projectImageArray.join("\n");
-            };
-
-            let projectInstall = response.projectInstall;
-
-            let projectInstallScreenshots = [];
-            if (response.projectInstallScreenshots != "") {
-                projectInstallScreenshots = splitAndTrim(response.projectInstallScreenshots);
-                projectInstallScreenshots = projectInstallScreenshots.map((element, index) => `![Project Install Image ${index}](${element})`);    
-                projectInstallScreenshots.forEach(element => projectInstall += "\n" + element);
-            };
-
-            let projectUsage = response.projectUsage;
-
-            let projectUsageScreenshots = [];
-            if (response.projectUsageScreenshots != "") {
-                projectUsageScreenshots = splitAndTrim(response.projectUsageScreenshots);
-                projectUsageScreenshots = projectUsageScreenshots.map((element, index) => `![Project Usage Image ${index}](${element})`);    
-                projectUsageScreenshots.forEach(element => projectUsage += "\n" + element);
-            };
-
-            let projectTests = response.projectTests;
-
-            let projectTestScreenshots = [];
-            if (response.projectTestScreenshots != "") {
-                projectTestScreenshots = splitAndTrim(response.projectTestScreenshots);
-                projectTestScreenshots = projectTestScreenshots.map((element, index) => `![Project Tests Image ${index}](${element})`);    
-                projectTestScreenshots.forEach(element => projectTests += "\n" + element);
-            };
-
-            let projectForQuestions = response.projectQs;
-
-            //  Plug the answers into a data structure for projects
-            _project = new ProjectInfo(projectTitle, projectLogo, projectBadges, projectTagline, projectIntro, projectImages, 
-                projectInstall, projectUsage, response.projectLicense, projectContributors, projectTests, projectForQuestions);
-            
-            //  Now create the readme with the user answers
-            generateReadme(_user, _project);
+    return axios
+        .get(queryUrl)
+        .then(function (response) {
+            const { avatar_url } = response.data.items[0];
+            return avatar_url;
         });
-    });
-};
+}
 
-/**
- * Create and output the ReadMe.md file
- * @param {Object} userData Data structure for user information
- * @param {Object} projectData Data structure for project information
- */
-function generateReadme(userData, projectData) {
-    let hasLogo = (projectData.logo != "");
-    let hasBadges = (projectData.badges != "");
-    let hasTagline = (projectData.tagline != "");
-    let hasIntro = (projectData.introduction != "");
-    let hasProjectImage = (projectData.image != "");
-    let hasTeam = (projectData.contributing != "");
-    let hasLicense = !((projectData.license == "") || (projectData.license == _LICENSE_TYPES[_LICENSE_NONE]));
-    let hasTests = (projectData.tests != "");
-    let currentDate = new Date().toLocaleDateString();
+// Create function to generate the template literate using data from the prompt and GitHub call
+function generateREADME(fullName, username, title, shortDescription, longDescription, screenshotUrl, installation, usage, credits, license, tests, avatar, badge) {
+    return `
+# ${title}   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) ![User Badge](${badge})
+> ${shortDescription}  
 
-    let mdText = "";
-    if (hasLogo) {
-        mdText = projectData.logo + "\n";
-    };
-    
-    mdText +=
-`# ${projectData.title}
-`;
 
-    if (hasBadges) {
-        mdText += projectData.badges + "\n";
-    };
+## Description
 
-    mdText += "\n";
+${longDescription}
 
-    if (hasTagline) {
-        mdText += "> " + projectData.tagline + "\n\n";
-    };
 
-    if (hasIntro) {
-        mdText += projectData.introduction + "\n\n";
-    };
+![Screenshot](${screenshotUrl})
 
-    mdText += 
-`## User Story
 
-\`\`\`
-AS A 
-I WANT 
-SO THAT 
-\`\`\`
-
-\`\`\`
-GIVEN THAT 
-WHEN I 
-THEN 
-\`\`\`
-
-`;
-
-    if (hasProjectImage) {
-        mdText += "## Graphic\n" + projectData.image + "\n";
-    };
-
-    mdText +=
-`
 ## Table of Contents
-* [Technologies](#Technologies)
-* [Getting Started](#Getting)
-* [Usage](#Usage)
-`;
-
-    if (hasTests) {
-        mdText += `* [Tests](#Running)`;
-    };
-
-    if (hasTeam) {
-        mdText += `* [Team](#Team)`;
-    };
-
-    mdText +=
-`* [Project Status](#Project)
-* [Frequently Asked Questions](#FAQ)
-* [Questions](#Additional)
-* [Contributing](#Contributing)
-`;
-
-    if (hasLicense) {
-        mdText += "* [License](#License)\n";
-    };
-
-    mdText +=
-`## Technologies
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Author](#author)
 
 
-## Getting Started
-${projectData.installation}
+## Installation
+
+    ${installation}
+
 
 ## Usage
-${projectData.usage}
 
-`;
-
-    if (hasTests) {
-        mdText += `## Running the Tests
-        ${projectData.tests}
-        `;
-    };
-
-    if (hasTeam) {
-        mdText += `## Team
-        ${projectData.contributing}
-        `;
-    };
-
-    mdText +=
-`## Project Status
+    ${usage}
 
 
-## FAQ
-- 
-- 
-- 
+## Credits
 
-## Additional Questions
+    ${credits}
+
+
+## License
+
+    ${license}
 
 
 ## Contributing
-Interested in submitting a contribution? Contact mathcodes on GitHub.
-`;
 
-    if (hasLicense) {
-        mdText += 
-`## License
-This project is licensed under the ${projectData.license}.
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
 
+[Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/)
+
+
+## Tests
+
+    ${tests}
+
+
+## Author
+
+Name: __${fullName}__  
+GitHub: github.com/${username}  
+![Image of Me](${avatar})
+
+---
+© 2020 ${fullName}. All Rights Reserved.
 `
-    };
-    mdText +=
-`
-![User Avatar Picture](${userData.avatar})  ${userData.name}
-
-This document was generated by Jon's ReadMe Generator for homework 9 \n© 2020 Jon Christie
-`
-
-   fs.writeFileSync(_filename, mdText, "utf8");
-   console.log(`'${_filename}' complete... SUCCESS!!!`)
-};
-
-//  **  Utility Functions
-
-/**
- * Query the GitHub API to learn details on the user
- * @param {Text} userName GitHub user name
- */
-function getGitUser(userName) {
-    let queryUrl = _GITHUBAPI_USER_ENDPOINT.replace("%NAME%", userName);
-    axios
-    .get(queryUrl, {headers: {Authorization: _myGitHubAccessToken}})
-    .then(data => {
-        const responseData = data.data;
-        const { login, id, node_id, avatar_url, email, url, html_url, type, site_admin } = responseData;
-
-        userData = new UserInfo(login, avatar_url, email, html_url, type, site_admin);
-        _user = userData;
-    });
-};
-
-/**
- * Query the GitHub search API to find the listed user
- * @param {Text} searchTerm GitHub user name
- */
-function findGitUser(searchTerm) {
-    let userData;
-    let queryUrl = _GITHUBAPI_USERSEARCH_ENDPOINT.replace("%NAME%", searchTerm);
-
-    axios
-    .get(queryUrl, {headers: {Authorization: _myGitHubAccessToken}})
-    .then(data => {
-        if (!data.data) {
-            userData = null;
-            return;
-        }
-
-        for (let i = 0; i < data.data.items.length; i++) {
-            const userItems = data.data.items[i];
-            const { login, id, node_id, avatar_url, email, url, html_url, type, site_admin } = userItems;
-
-            userData = new UserInfo(login, avatar_url, email, html_url, type, site_admin);
-            _team.push(userData);
-        };
-    });
-};
-
-// /**
-//  * Iterate through a list of collaborators to gain and store information on each
-//  * @param {Array} teamNameArray Array of GitHub user names
-//  */
-// function getTeam(teamNameArray) {
-//     teamNameArray.forEach(element => {
-//         let userData;
-//         let queryUrl = _GITHUBAPI_USERSEARCH_ENDPOINT.replace("%NAME%", element);
-
-//         axios
-//         .get(queryUrl, {headers: {Authorization: _myGitHubAccessToken}})
-//         .then(data => {
-//             if (!data.data) {
-//                 userData = null;
-//                 return;
-//             }
-
-//             for (let i = 0; i < data.data.items.length; i++) {
-//                 const userItems = data.data.items[i];
-//                 const { login, id, node_id, avatar_url, email, url, html_url, type, site_admin } = userItems;
-
-//                 userData = new UserInfo(login, avatar_url, email, html_url, type, site_admin);
-//                 _team.push(userData);
-//             };
-//         });
-//     });
-// };
-
-/**
- * Return the MD image link for the given license
- * @param {Number} licenseType License type per the enumerated constant _LICENSE_ values
- */
-function licenseURL(licenseType) {
-    let returnString = "";
-    switch (licenseType) {
-        case _LICENSE_INQUIRER:
-            returnString = "[![npm](https://badge.fury.io/js/inquirer.svg)](http://badge.fury.io/js/inquirer)";
-            break;
-        case _LICENSE_BSD_3CLAUSE:
-            returnString = "[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
-            break;
-        case _LICENSE_CREATIVE_COMMONS_1:
-            returnString = "[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)";
-            break;
-        case _LICENSE_GNU_GPL3:
-            returnString = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
-            break;
-        case _LICENSE_MIT:
-            returnString = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
-            break;
-        case _LICENSE_MOZILLA:
-            returnString = "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)";
-            break;
-        case _LICENSE_UNLICENSE:
-            returnString = "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)";
-            break;
-        default:
-    };
-    return returnString;
-};
-
-/**
- * Breaks string into an array along a given delimiter and trims the results
- * @param {Text} targetString String to split
- * @param {Text} delimiter Delimiter on which to split the string, or a comma (,) if none given
- */
-function splitAndTrim(targetString, delimiter) {
-    if (!delimiter || (delimiter == "")) {
-        delimiter = ","
-    };
-    let returnArray = targetString.split(delimiter);
-    returnArray = returnArray.map(element => element.trim());
-    return returnArray;
-};
-
-//  **  Logic
-
-_user = new UserInfo(null, null, null, null, null, null);
-_project = new ProjectInfo(null, null, null, null, null, null, null, null);
-
-getProjectData();
-
-
+}
