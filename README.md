@@ -23,10 +23,10 @@ The Master Markdown Maker is a ReadME generator, allowing users to freely genera
 ---
 
 ## Installation
-#### npm install
+#### type "npm install" into the terminal
 ---
 ## Usage
-index.js
+#### type "index.js" into the terminal
 ## License
 This application is open source, so fork, clone, download as you wish. Please return the favor by following and throwing a :star: my way! :+1:
 ## Contributing
