@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "ReadMeGeneration",
     "version": "1.0.0",
     "description": "",
@@ -22,3 +23,28 @@
         "inquirer": "^7.1.0"
     }
 }
+=======
+  "name": "ReadMeGenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathcodes/ReadMeGenerator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mathcodes/ReadMeGenerator/issues"
+  },
+  "homepage": "https://github.com/mathcodes/ReadMeGenerator#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.1.0"
+  }
+}
+>>>>>>> e2388141003bd3115b573c098241271b89f0c233
