@@ -37,6 +37,9 @@ Go to your favorite terminal and type "index.js" in the command line, then hit e
 ## Questions
 #### Feel free to email me directly at jonpchristie@gmail.com with any questions or to simply connect and say hey. Don't forget to :star::star::star:!
 ---
-Name: __Jonathan P Christie__
-GitHub: [mathcodes](https://github.com/mathcodes)  
+
 ![Image of Me](https://avatars0.githubusercontent.com/u/17928947?v=4)
+
+Name: __Jonathan P Christie__
+
+GitHub: [mathcodes](https://github.com/mathcodes)  
