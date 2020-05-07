@@ -15,7 +15,7 @@ ${answers.description}
 * [Contributing](#contributing)
 * [Tests](#tests)
 * [Questions](#questions)
->>>>>>> 0ec7fc08fcdb55c89719f2b2e27730c993e068ee
+ 
 
 ## Installation
 ${answers.installation}
@@ -26,6 +26,7 @@ ${answers.license}
 ## Contributing
 ${answers.contributing}
 ## Tests
+\`\`\` npm run test \`\`\` 
 ${answers.tests}
 ## Questions
 ${answers.questions}

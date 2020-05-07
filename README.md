@@ -32,7 +32,7 @@ This application is open source, so fork, clone, download as you wish. Please re
 ## Contributing
 Go to your favorite terminal and type "index.js" in the command line, then hit enter. Simply follow the prompts and you are done! Just keep in mind as you enter in the information, you are creating the content that ends up in the ReadME file, so be clear, concise, and thorough. 
 ## Tests
-#### "node test" on command line
+#### "npm run test" on command line
 ---
 ## Questions
 #### Feel free to email me directly at jonpchristie@gmail.com with any questions or to simply connect and say hey. Don't forget to :star::star::star:!
