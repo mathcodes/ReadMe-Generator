@@ -1,5 +1,5 @@
 {
-  "name": "ReadMeGen",
+  "name": "ReadMeGenerator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mathcodes/ReadMeGen.git"
+    "url": "git+https://github.com/mathcodes/ReadMeGenerator.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mathcodes/ReadMeGen/issues"
+    "url": "https://github.com/mathcodes/ReadMeGenerator/issues"
   },
-  "homepage": "https://github.com/mathcodes/ReadMeGen#readme",
+  "homepage": "https://github.com/mathcodes/ReadMeGenerator#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "inquirer": "^7.1.0"
