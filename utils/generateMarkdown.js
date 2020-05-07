@@ -17,7 +17,7 @@ ${answers.description}
 * [Tests](#tests)
 * [Questions](#questions)
 =======
-${answers.descripton}
+${answers.description}
 
 ## Table of Contents
 
