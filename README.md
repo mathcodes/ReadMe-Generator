@@ -1,9 +1,9 @@
 
 # Master Markdown Maker
 
-* ![MIT](https://img.shields.io/badge/License-MIT-orange/) 
-* ![node](https://img.shields.io/badge/node.js-enabled-green/) 
-* ![readme](https://img.shields.io/badge/README-generator-blue/) 
+* ![MIT](https://img.shields.io/badge/License-MIT-orange/)
+* ![node](https://img.shields.io/badge/node.js-enabled-green/)
+* ![readme](https://img.shields.io/badge/README-generator-blue/)
 * ![github](https://img.shields.io/badge/GitHub-enabled-black/)
 
 ## Description
