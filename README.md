@@ -7,7 +7,7 @@
 * ![github](https://img.shields.io/badge/GitHub-enabled-black/)
 
 ## Description
-The Master Markdown Maker is a ReadME generator, allowing users to freely generate clean, consistent, and professional ReadME file. 
+#### The Master Markdown Maker is a ReadME generator, allowing users to freely generate clean, consistent, and professional ReadME file. 
 ---
 ## Table of Contents
 
