@@ -4,29 +4,31 @@
 ![badge](https://img.shields.io/badge/License-MIT-orange/)
 
 ## Description
-undefined
+Described
 
 ## Table of Contents
-
-*[Installation](#installation),
-*[Usage](#usage),
-*[License](#license),
-*[Contributing](#contributing),
-*[Tests](#tests),
-*[Questions](#questions)
+- [Master Markdown Maker](#master-markdown-maker)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
+  - [Questions](#questions)
 
 ## Installation
 npm install
 ## Usage
 index.js
 ## License
-none
+a license to code
 ## Contributing
-simply type the command "index.js" in your terminal!
+:infinite:
 ## Tests
-undefined
+npm test
 ## Questions
-feel free to contact me at jonpchristie@gmail.com
+like hotdogs?
 
 Name: __Jonathan P Christie__
 GitHub: [mathcodes](https://github.com/mathcodes)  

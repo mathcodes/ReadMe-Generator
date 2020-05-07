@@ -5,16 +5,16 @@ function generateMarkdown(answers, badges, response) {
 ![badge](https://img.shields.io/badge/License-MIT-orange/)
 
 ## Description
-${answers.descripton}
+${answers.description}
 
 ## Table of Contents
-
-*[Installation](#installation),
-*[Usage](#usage),
-*[License](#license),
-*[Contributing](#contributing),
-*[Tests](#tests),
-*[Questions](#questions)
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
 
 ## Installation
 ${answers.installation}

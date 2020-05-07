@@ -6,13 +6,13 @@ const inquirer = require('inquirer');
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-
 const questions = [{
         type: 'input',
         name: 'fullName',
         message: 'Enter your full name:'
     },
     {
+
         type: 'input',
         name: 'username',
         message: 'Enter your Github username:'
@@ -27,19 +27,6 @@ const questions = [{
         name: 'description',
         message: 'Give your project a clear description:'
     },
-    // {
-    //     type: 'checkbox',
-    //     name: 'contents',
-    //     message: 'What would you want in your Table of Contents?',
-    //     choices: [
-    //         "*[Installation](#installation)",
-    //         "*[Usage](#usage)",
-    //         "*[License](#license)",
-    //         "*[Contributing](#contributing)",
-    //         "*[Tests](#tests)",
-    //         "*[Questions](#questions)"
-    //     ]
-    // },
     {
         type: 'input',
         name: 'installation',
@@ -59,6 +46,12 @@ const questions = [{
         type: "input",
         message: "What addition info, if any, does the user need to know in order to contribute to the application?",
         name: "contributing",
+
+    },
+    {
+        type: "input",
+        message: 'Let users know how they can go about running tests on the application, i.e. "npm test":',
+        name: "tests",
 
     },
     {
@@ -92,13 +85,3 @@ promptUser()
     .catch(function(err) {
         console.log(err);
     })
-
-// //function for rendering badges
-// function renderBadges(badge) {
-//     const badgeArr = badge.split(',');
-//     let badgeTemplate = '';
-//     for (let i = 0; i < badgeArr.length; i++) {
-//         badgeTemplate += '![Badge](' + badgeArr[i] + ')';
-//     }
-//     return badgeTemplate
-// }
