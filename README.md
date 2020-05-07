@@ -35,7 +35,7 @@ Go to your favorite terminal and type "index.js" in the command line, then hit e
 #### "node test" on command line
 ---
 ## Questions
-Feel free to email me directly at jonpchristie@gmail.com with any questions or to simply connect and say hey.
+#### Feel free to email me directly at jonpchristie@gmail.com with any questions or to simply connect and say hey. Don't forget to :star::star::star:!
 ---
 Name: __Jonathan P Christie__
 GitHub: [mathcodes](https://github.com/mathcodes)  
