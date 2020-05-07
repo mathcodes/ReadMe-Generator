@@ -1,7 +1,7 @@
 
 # Master Markdown Maker
 
-![badge](https://img.shields.io/badge/License-MIT-orange/)
+![badge](https://img.shields.io/badge/License-MIT-orange/) ![badge](https://img.shields.io/badge/node.js-enabled-green/) ![badge](https://img.shields.io/badge/README-generator-blue/) ![badge](https://img.shields.io/badge/Git-enabled-black/)
 
 ## Description
 The Master Markdown Maker is a ReadME generator, allowing users to freely generate clean, consistent, and professional ReadME file. 
