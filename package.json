@@ -1,5 +1,5 @@
 {
-  "name": "09-Good-README-Generator",
+  "name": "ReadMeGen",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aroblesgalit/09-Good-README-Generator.git"
+    "url": "git+https://github.com/cynthia-dm1216/ReadMeGen.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aroblesgalit/09-Good-README-Generator/issues"
+    "url": "https://github.com/cynthia-dm1216/ReadMeGen/issues"
   },
-  "homepage": "https://github.com/aroblesgalit/09-Good-README-Generator#readme",
+  "homepage": "https://github.com/cynthia-dm1216/ReadMeGen#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "inquirer": "^7.1.0"
