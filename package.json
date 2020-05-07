@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cynthia-dm1216/ReadMeGen.git"
+    "url": "git+https://github.com/mathcodes/ReadMeGen.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cynthia-dm1216/ReadMeGen/issues"
+    "url": "https://github.com/mathcodes/ReadMeGen/issues"
   },
-  "homepage": "https://github.com/cynthia-dm1216/ReadMeGen#readme",
+  "homepage": "https://github.com/mathcodes/ReadMeGen#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "inquirer": "^7.1.0"
