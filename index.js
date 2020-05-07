@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-<<<<<<< HEAD
+
 const questions = [{
         type: 'input',
         name: 'fullName',
@@ -63,7 +63,7 @@ const questions = [{
 ];
 
 
-=======
+
 
 const questions = [{
         type: 'input',
@@ -85,19 +85,6 @@ const questions = [{
         name: 'description',
         message: 'Give your project a clear description:'
     },
-    // {
-    //     type: 'checkbox',
-    //     name: 'contents',
-    //     message: 'What would you want in your Table of Contents?',
-    //     choices: [
-    //         "*[Installation](#installation)",
-    //         "*[Usage](#usage)",
-    //         "*[License](#license)",
-    //         "*[Contributing](#contributing)",
-    //         "*[Tests](#tests)",
-    //         "*[Questions](#questions)"
-    //     ]
-    // },
     {
         type: 'input',
         name: 'installation',
@@ -127,7 +114,7 @@ const questions = [{
 ];
 
 
->>>>>>> e2388141003bd3115b573c098241271b89f0c233
+
 function promptUser() {
     return inquirer.prompt(questions);
 }
@@ -150,18 +137,4 @@ promptUser()
     })
     .catch(function(err) {
         console.log(err);
-<<<<<<< HEAD
     })
-=======
-    })
-
-// //function for rendering badges
-// function renderBadges(badge) {
-//     const badgeArr = badge.split(',');
-//     let badgeTemplate = '';
-//     for (let i = 0; i < badgeArr.length; i++) {
-//         badgeTemplate += '![Badge](' + badgeArr[i] + ')';
-//     }
-//     return badgeTemplate
-// }
->>>>>>> e2388141003bd3115b573c098241271b89f0c233
