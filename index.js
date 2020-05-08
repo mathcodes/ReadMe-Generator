@@ -26,39 +26,35 @@ const questions = [{
     {
         type: 'input',
         name: 'description',
-        message: 'Give your project a clear description:'
+        message: 'Please write a description of your project:'
     },
     {
-        type: 'input',
-        name: 'installation',
-        message: 'Specify all command lines need to run installations, i.e. "npm install":'
+        type: "input",
+        name: "installation",
+        message: "Specify the command users will need to install dependencies.",
+        default: "npm install"
     },
     {
         type: 'input',
         name: 'usage',
-        message: 'Specify the command line users will need to run the application, i.e. "index.js":'
+        message: 'Specify anything else the user needs to know to use your project.',
     },
     {
         type: 'input',
         name: 'license',
-        message: 'What license, if any, is associated with this application?'
+        message: 'What license, if any, is associated with this project?'
     },
     {
         type: "input",
-        message: "What addition info, if any, does the user need to know in order to contribute to the application?",
+        message: "What addition info, if any, does the user need to know in order to contribute to the project?",
         name: "contributing",
 
     },
     {
         type: "input",
-        message: 'Let users know how they can go about running tests on the application, i.e. "npm run test":',
-        name: "tests",
-
-    },
-    {
-        type: "input",
-        message: "Provide links with instruction and contact information so the users can find answers to questions they may have, such as opening an issue or emailing you directly:",
-        name: "questions",
+        name: "test",
+        message: "Specify the command users will need to run tests?",
+        default: "npm test"
     },
 ];
 

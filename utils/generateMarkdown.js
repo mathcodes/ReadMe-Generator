@@ -29,12 +29,11 @@ ${answers.contributing}
 \`\`\` npm run test \`\`\` 
 ${answers.tests}
 ## Questions
-${answers.questions}
-
 Name: __${response.data.name}__
-GitHub: [${response.data.login}](https://github.com/${response.data.login})  
+GitHub: [${response.data.login}](https://github.com/${response.data.login})
 ![Image of Me](${response.data.avatar_url})
+
+If you have any questions about the repo, open an issue or contact [${response.data.login}](https://github.com/${response.data.login}) directly at [${response.data.login}](https://github.com/${response.data.id})
 `;
 }
-
 module.exports = generateMarkdown;
