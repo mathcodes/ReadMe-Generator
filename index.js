@@ -52,9 +52,9 @@ const questions = [{
     },
     {
         type: "input",
-        name: "test",
+        name: "tests",
         message: "Specify the command users will need to run tests?",
-        default: "npm test"
+        default: "npm run test"
     },
 ];
 
@@ -66,19 +66,14 @@ function promptUser() {
 
 promptUser()
     .then(function(answers) {
-        let github = "";
         return api.getUser(answers.username)
             .then(function(githubData) {
-                console.log(githubData);
-                github = githubData;
-            })
-            .then(function(newbadges) {
-                const md = generateMarkdown(answers, newbadges, github);
-                return writeFileAsync('README.NEW.md', md);
-            })
-    }).then(function() {
-        console.log("New Markdown file named README.NEW.md has been generated");
-    })
-    .catch(function(err) {
-        console.log(err);
-    })
+                const md = generateMarkdown(answers, githubData);
+                return writeFileAsync('output/README.md', md)
+                    .then(function() {
+                        console.log("New Markdown file named README.NEW.md has been generated");
+                    });
+            }).catch(function(err) {
+                console.log(err);
+            });
+    });
