@@ -1,32 +1,33 @@
 
-# Master Markdown Maker
+# f
 ​
 ![badge](https://img.shields.io/badge/License-MIT-orange)
 ​
 ## Description
-This project allows users to reply to a set of prompts and generates a README.MD file.
+
 ​
 ## Table of Contents
-- [Master Markdown Maker](#master-markdown-maker)
-  - [Description](#description)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Questions](#questions)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
  
 ## Installation
 ``` npm install ``` 
 ​
 ## Usage
-Be thorough and enjoy!
+```   ``` 
 ​
 ## License
 MIT
 ​
 ## Contributing
-Enjoy :)
+f
 ​
 ## Tests
-``` npm run test ```
+``` f ```
 ​
 ## Questions
 
