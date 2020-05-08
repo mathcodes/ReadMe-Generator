@@ -18,8 +18,8 @@
 * [Tests](#tests)
 * [Questions](#questions)
 ---
-
-![Project GIF](https://github.com/mathcodes/ReadMe-Generator/blob/master/assets/NPM_READMEGEN.gif?raw=true)
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/rwZV2VeZtMw/0.jpg)](https://www.youtube.com/watch?v=rwZV2VeZtMw)
+<iframe src="https://www.youtube.com/watch?v=rwZV2VeZtMw" width="640" height="480" allow="autoplay"></iframe>
 ---
 
 ## Installation
