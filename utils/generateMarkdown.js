@@ -7,6 +7,8 @@ function generateMarkdown(answers, response) {
 ## Description
 ${answers.description}
 ​
+![Project GIF](assets.MMM.if)
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)

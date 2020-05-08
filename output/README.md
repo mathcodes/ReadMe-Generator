@@ -1,10 +1,10 @@
 
-# f
+# Master Markdown Maker
 ​
 ![badge](https://img.shields.io/badge/License-MIT-orange)
 ​
 ## Description
-
+Generate consistent README.md files.
 ​
 ## Table of Contents
 * [Installation](#installation)
@@ -18,20 +18,18 @@
 ``` npm install ``` 
 ​
 ## Usage
-```   ``` 
+```  The file generated will be found in the folder named "output". ``` 
 ​
 ## License
 MIT
 ​
 ## Contributing
-f
+Feel free to request a pull and suggest changes!
 ​
 ## Tests
-``` f ```
+``` npm run test ```
 ​
 ## Questions
-
-
 If you have any questions about the repo, open an issue or contact [mathcodes](https://github.com/mathcodes) directly to <a href="mailto :jonpchristie@gmail.com">my email</a>.
 
 
