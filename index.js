@@ -40,9 +40,16 @@ const questions = [{
         message: 'Specify anything else the user needs to know to use your project.',
     },
     {
-        type: 'input',
+        type: "list",
+        message: "Enter information about your licensing: ",
         name: 'license',
-        message: 'What license, if any, is associated with this project?'
+        choices: [
+            "MIT",
+            "GPL 3.0",
+            "Apache 2.0",
+            "BSD 3",
+            "None"
+        ]
     },
     {
         type: "input",
