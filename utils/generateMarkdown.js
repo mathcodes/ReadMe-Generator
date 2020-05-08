@@ -33,7 +33,7 @@ ${answers.contributing}
 \`\`\` ${answers.tests} \`\`\`
 ​
 ## Questions
-If you have any questions about the repo, open an issue or contact [${response.data.login}](https://github.com/${response.data.login}) directly to <a href="mailto :jonpchristie@gmail.com">my email</a>.
+If you have any questions about the repo, open an issue or contact [${response.data.login}](https://github.com/${response.data.login}) directly to <a href="mailto:jonpchristie@gmail.com">my email</a>.
 
 
 
