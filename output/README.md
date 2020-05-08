@@ -30,7 +30,7 @@ Feel free to request a pull and suggest changes!
 ``` npm run test ```
 ​
 ## Questions
-If you have any questions about the repo, open an issue or contact [mathcodes](https://github.com/mathcodes) directly to <a href="mailto :jonpchristie@gmail.com">my email</a>.
+If you have any questions about the repo, open an issue or contact [mathcodes](https://github.com/mathcodes) directly to <a href="mailto:jonpchristie@gmail.com">my email</a>.
 
 
 
