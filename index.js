@@ -13,6 +13,11 @@ const questions = [{
         message: 'Enter your full name:'
     },
     {
+        type: "input",
+        message: "What the best email address for users to contact you with?",
+        name: "email",
+    },
+    {
 
         type: 'input',
         name: 'username',
