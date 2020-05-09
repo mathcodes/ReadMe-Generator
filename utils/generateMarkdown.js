@@ -36,7 +36,6 @@ ${answers.contributing}
 If you have any questions about the repo, open an issue or contact [${response.data.login}](https://github.com/${response.data.login}) directly to <a href="mailto:${answers.email}">my email</a>.
 
 
-
 ![Image of Me](${response.data.avatar_url})
 
 __${response.data.name}__ ([${response.data.login}](https://github.com/${response.data.login}))
