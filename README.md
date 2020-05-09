@@ -1,44 +1,39 @@
-
 # Master Markdown Maker
+​
+| ![node](https://img.shields.io/badge/node-enabled-green)        | ![readme](https://img.shields.io/badge/README-generator-blue)           | ![github](https://img.shields.io/badge/GitHub-enabled-black)  |
+| ------------- |:-------------:| -----:|
 
-
-* ![node](https://img.shields.io/badge/node-enabled-green)
-* ![readme](https://img.shields.io/badge/README-generator-blue)
-* ![github](https://img.shields.io/badge/GitHub-enabled-black)
+​![IMAGE ALT TEXT HERE](MMMM.gif)
 
 ## Description
-#### The Master Markdown Maker is a ReadME generator, allowing users to freely generate clean, consistent, and professional ReadME file. 
----
+Generate consistent README.md files.
+​
 ## Table of Contents
-
 * [Installation](#installation)
 * [Usage](#usage)
 * [License](#license)
 * [Contributing](#contributing)
 * [Tests](#tests)
 * [Questions](#questions)
----
-![IMAGE ALT TEXT HERE](MMMM.gif)
----
-
+ 
 ## Installation
-#### type "npm install" into the terminal
----
+``` npm install ``` 
+​
 ## Usage
-#### type "index.js" into the terminal
+The file generated will be found in the folder named "output".
+​
 ## License
-This application is open source, so fork, clone, download as you wish. Please return the favor by following and throwing a :star: my way! :+1:
+MIT
+​
 ## Contributing
-Go to your favorite terminal and type "index.js" in the command line, then hit enter. Simply follow the prompts and you are done! Just keep in mind as you enter in the information, you are creating the content that ends up in the ReadME file, so be clear, concise, and thorough. 
+Feel free to request a pull and suggest changes!
+​
 ## Tests
-#### "npm run test" on command line
----
+``` npm run test ```
+​
 ## Questions
-#### Feel free to email me directly at jonpchristie@gmail.com with any questions or to simply connect and say hey. Don't forget to :star::star::star:!
----
+If you have any questions about the repo, open an issue or contact [mathcodes](https://github.com/mathcodes) directly to <a href="mailto:jonpchristie@gmail.com">my email</a>. :+1:
 
 ![Image of Me](https://avatars0.githubusercontent.com/u/17928947?v=4)
 
-Name: __Jonathan P Christie__
-
-GitHub: [mathcodes](https://github.com/mathcodes)  
+__Jonathan P Christie__ ([mathcodes](https://github.com/mathcodes))
