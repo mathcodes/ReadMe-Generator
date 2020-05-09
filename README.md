@@ -2,9 +2,9 @@
 # Master Markdown Maker
 
 
-* ![node](https://img.shields.io/badge/node-enabled-blue/)
-* ![readme](https://img.shields.io/badge/README-generator-blue/)
-* ![github](https://img.shields.io/badge/GitHub-enabled-black/)
+* ![node](https://img.shields.io/badge/node-enabled-green)
+* ![readme](https://img.shields.io/badge/README-generator-blue)
+* ![github](https://img.shields.io/badge/GitHub-enabled-black)
 
 ## Description
 #### The Master Markdown Maker is a ReadME generator, allowing users to freely generate clean, consistent, and professional ReadME file. 
@@ -18,7 +18,7 @@
 * [Tests](#tests)
 * [Questions](#questions)
 ---
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/rwZV2VeZtMw/0.jpg)](https://www.youtube.com/watch?v=rwZV2VeZtMw)
+![IMAGE ALT TEXT HERE](MMMM.gif)
 ---
 
 ## Installation
