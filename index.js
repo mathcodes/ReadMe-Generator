@@ -83,7 +83,7 @@ promptUser()
                 const md = generateMarkdown(answers, githubData);
                 return writeFileAsync('output/README.md', md)
                     .then(function() {
-                        console.log("New Markdown file named README.NEW.md has been generated");
+                        console.log("New Markdown file named README.md has been generated");
                     });
             }).catch(function(err) {
                 console.log(err);
