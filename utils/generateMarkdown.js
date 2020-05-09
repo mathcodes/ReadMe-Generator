@@ -7,8 +7,6 @@ function generateMarkdown(answers, response) {
 ## Description
 ${answers.description}
 ​
-<iframe src="https://www.youtube.com/watch?v=rwZV2VeZtMw" width="640" height="480" allow="autoplay"></iframe>
-
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
