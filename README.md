@@ -1,6 +1,6 @@
 # Master Markdown Maker
 ​
-![MIT](https://img.shields.io/badge/MIT-generator-blue) 
+![MIT](https://img.shields.io/badge/License-MIT-blue) 
 
 ​![IMAGE ALT TEXT HERE](MMMM.gif)
 
@@ -22,7 +22,7 @@ Generate consistent README.md files.
 The file generated will be found in the folder named "output".
 ​
 ## License
-No licenses
+MIT
 ​
 ## Contributing
 Feel free to request a pull and suggest changes!
